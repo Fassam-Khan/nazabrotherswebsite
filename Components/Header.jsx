@@ -1,7 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
+import CategoriesData from '@/data/Categories'
+import categories from '@/data/Categories'
 
 const Header = () => {
+    console.log(CategoriesData)
     return (
         <div>
             {/* Top Head  */}
@@ -18,6 +21,13 @@ const Header = () => {
                     </div>
                     {/* Search div  */}
                     <div>
+                        <select name="" id="">
+                            <option value="">All Categories</option>
+                            {CategoriesData.map((category,index)=>{
+                                return <option value="" key={index}>{category.name}</option>
+                            })}
+
+                        </select>
                         <input type="text" placeholder='Search Product' className='' />
 
                     </div>
