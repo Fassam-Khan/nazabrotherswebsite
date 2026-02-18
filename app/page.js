@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
     <Header/>
-    <main className="md:max-w-[1230px] mt-2 m-auto md:p-0 p-5  border  ">
+    <main className="md:max-w-[1230px] mt-2 m-auto md:p-0 p-5    ">
       <div className="w-[80%] m-auto ">
       <CategoriesSlider  />
 
