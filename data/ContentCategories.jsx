@@ -1,0 +1,6 @@
+const MainCategories = [
+    {
+        name: "Brushes",
+        
+    }
+]
