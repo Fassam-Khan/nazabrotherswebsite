@@ -16,8 +16,8 @@ const Header = () => {
                 </p>
             </div>
             {/* middle Head  */}
-            <div className='max-w-[1600px] md:m-auto md:p-5  '>
-                <div className='flex justify-between items-center md:h-16 h-12 p-2 mt-2'>
+            <div className='max-w-[1200px] md:m-auto   '>
+                <div className='flex justify-between items-center md:h-16 h-12  mt-2'>
                     {/* logo div  */}
                     <div >
                         <Image className='md:flex hidden' src={'/Images/logo.png'} alt='nazarLogo' width={200} height={100} />
