@@ -2,6 +2,7 @@ import Header from "@/Components/Header";
 import Image from "next/image";
 import  CategoriesSlider  from "@/Components/CategoriesSlider";
 import Hero from "@/Components/Hero";
+import Categories from "@/Components/Categories";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       </div>
       {/* Hero Section  */}
       <Hero/>
+      <Categories/>
       
     </main>
     

@@ -14,7 +14,7 @@ const CategoriesSlider = () => {
   console.log(categories)
   return (
     
-    <Carousel>
+    <Carousel className="ml-6 mr-6">
         
     <CarouselContent>
       {categories.map((category,index)=>{

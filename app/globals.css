@@ -7,8 +7,9 @@
   src: url('/fonts/GeneralSans-Regular.otf') format('opentype');
 }
 body{
-  overflow: hidden;
+  font-family: 'font', sans-serif;
 }
+
 :root{
   --primary-color: #DD1710 ;
   --radius: 0.625rem;
