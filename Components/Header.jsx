@@ -2,12 +2,16 @@ import React from 'react'
 import Image from 'next/image'
 import CategoriesData from '@/data/Categories'
 import { Search, User, Star, ShoppingBag, ChevronDown, Menu } from "lucide-react";
+import { getCategories } from '@/lib/wordpress-api';
+import Link from 'next/link';
 
 
-import categories from '@/data/Categories'
 
-const Header = () => {
-    console.log(CategoriesData)
+
+const Header   = async () => {
+
+    const categories = await getCategories();
+
     return (
         <div className=''>
             {/* Top Head  */}
@@ -23,7 +27,7 @@ const Header = () => {
                     <div className='flex justify-between items-center md:h-16 h-12  mt-2'>
                         {/* logo div  */}
                         <div >
-                            <Image className='md:flex hidden' src={'/Images/logo.png'} alt='nazarLogo' width={200} height={100} />
+                            <a href="/"><Image className='md:flex hidden' src={'/Images/logo.png'} alt='nazarLogo' width={200} height={100} /></a>
                             <Menu className='md:hidden block' />
 
                         </div>
@@ -63,8 +67,16 @@ const Header = () => {
                 {/* Bottom Head  */}
                 <div className='md:flex bg-[var(--primary-color)] hidden text-white h-10 justify-center items-center'>
                     <ul className='flex gap-5'>
-                        {categories.map((category, index) => {
-                            return <li key={index} className='flex cursor-pointer font-bold'>{category.name} <ChevronDown className='w-4 text-white' /> </li>
+                        {categories
+                                  .filter((cat) => cat.name !== "Uncategorized")
+                                                                                
+                        .map((category, index) => {
+                            
+                            return  <Link
+                            key={category.id}
+                            href={`/products?category=${category.id}`}
+                            className="hover:text-blue-600"
+                          ><li key={index} className='flex cursor-pointer font-bold'>{category.name} <ChevronDown className='w-4 text-white' /> </li>  </Link>
 
                         })}
 
