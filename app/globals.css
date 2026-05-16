@@ -10,6 +10,12 @@ body{
   font-family: 'font', sans-serif;
 }
 
+.wrapper{
+  max-width: 1200px;
+  margin: auto;
+
+}
+
 :root{
   --primary-color: #DD1710 ;
   --radius: 0.625rem;
