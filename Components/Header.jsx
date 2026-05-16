@@ -3,8 +3,8 @@ import Image from 'next/image'
 import { Search, User, Star, ShoppingBag, Menu } from "lucide-react";
 import Link from 'next/link';
 import CategoriesData from "@/data/Categories"
-import { Button } from "@/components/ui/button"
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
+import { Button } from './ui/button';
+import { HoverCard ,HoverCardContent,HoverCardTrigger} from '@/Components/ui/hover-card';
 import { getCategories1 } from '@/lib/wordpress-api';
 
 const Header = async () => {
