@@ -33,15 +33,18 @@ function buildCategoryPath(category, idMap) {
 
 const CategoriesSlider = async () => {
   const categories = await getCategories1()
+  const filterCategories = categories?.filter((cat) =>
+  ["Paint Brushes", "Acrylic Paints","Watercolor", "Canvas", "Office Supplies","Art Tool &amp; Wire"].includes(cat.name)
+);  
 
   // Build a fast id → category lookup map
-  const idMap = new Map(categories.map((cat) => [cat.id, cat]))
+  const idMap = await new Map(categories?.map((cat) => [cat.id, cat]))
 
   return (
     <div className="px-4 py-2">
       <Carousel>
         <CarouselContent>
-          {categories.map((category) => {
+          {filterCategories?.map((category) => {
             const href = buildCategoryPath(category, idMap)
 
             return (
