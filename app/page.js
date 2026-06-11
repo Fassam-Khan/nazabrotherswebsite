@@ -3,6 +3,7 @@ import Image from "next/image";
 import  CategoriesSlider  from "@/Components/CategoriesSlider";
 import Hero from "@/Components/Hero";
 import Categories from "@/Components/Categories";
+import BestDealPro from "@/Components/BestDealPro";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       {/* Hero Section  */}
       <Hero/>
       <Categories/>
+      <BestDealPro/>
       
     </main>
     

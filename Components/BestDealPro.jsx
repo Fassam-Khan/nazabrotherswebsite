@@ -1,0 +1,51 @@
+import React from 'react'
+import {getProductByBestDeal} from "@/lib/wordpress-api"
+
+
+const BestDealPro = async () => {
+
+    const bestDealPro = await getProductByBestDeal()
+
+    console.log(bestDealPro);
+  return (
+    <div className='mt-10'>
+         {/* Heading  */}
+         <div className='flex justify-between items-center border-b-2 border-[#c2c2c241] h-[60px]'>
+                <div> <h2 className='text-2xl font-extrabold'>Today’s Best Deals</h2></div>
+                <div className='hidden md:flex'><a href="#">View All Categories</a></div>
+            </div>
+
+
+            {/* product card  */}
+
+            <div className='mt-8 border flex flex-wrap p-4 gap-4'>
+
+                {/* left box  */}
+
+                <div>
+                    <img src={bestDealPro.images[0].src} alt="" />
+                </div>
+
+                {/* right Box  */}
+                <div className='flex flex-col gap-4'>
+                    <div>
+                        <p className='font-extrabold text-xl'>{bestDealPro?.name}</p>
+                    </div>
+
+                    <div>
+                        <p className='font-bold text-2xl '>PKR {bestDealPro.prices.price}</p>
+                    </div>
+
+                    <div>
+                        <button className='bg-red-700 cursor-pointer text-white py-2 px-4 rounded font-bold'>Add to Cart</button>
+
+                    </div>
+                </div>
+
+            </div>
+      
+    </div>
+  )
+}
+
+export default BestDealPro
