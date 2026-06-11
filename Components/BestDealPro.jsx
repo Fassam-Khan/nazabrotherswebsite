@@ -11,7 +11,7 @@ const BestDealPro = async () => {
     <div className='mt-10'>
          {/* Heading  */}
          <div className='flex justify-between items-center border-b-2 border-[#c2c2c241] h-[60px]'>
-                <div> <h2 className='text-2xl font-extrabold'>Today’s Best Deals</h2></div>
+                <div> <h2 className='text-2xl font-extrabold'>Today’s Best Deals.</h2></div>
                 <div className='hidden md:flex'><a href="#">View All Categories</a></div>
             </div>
 
