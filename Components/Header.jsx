@@ -99,7 +99,7 @@ const Header = async () => {
                                 <HoverCard key={category.id} openDelay={10} closeDelay={100}>
                                     <HoverCardTrigger asChild>
                                         <Button variant="link">
-                                            <Link href={`/product-category/${category.slug}`}>
+                                            <Link href={`/`}>
                                                 <li className='font-bold text-[14px] text-white'>
                                                     {category.name.toUpperCase()}
                                                 </li>
@@ -120,7 +120,7 @@ const Header = async () => {
                                                     <div key={sub.id} className="mb-2">
                                                         {/* Level 2 - Sub Category */}
                                                         <Link
-                                                            href={`/product-category/${sub.slug}`}
+                                                            href={`/`}
                                                             className="block font-semibold text-sm text-gray-800 hover:text-black px-2 py-1 hover:bg-gray-100 rounded"
                                                         >
                                                             {sub.name}
@@ -132,7 +132,7 @@ const Header = async () => {
                                                                 {thisSubSubs.map((subsub) => (
                                                                     <Link
                                                                         key={subsub.id}
-                                                                        href={`/product-category/${category.slug}/${sub.slug}/${subsub.slug}`}
+                                                                        href={`/`}
                                                                         className="block text-xs text-gray-500 hover:text-black py-0.5 hover:bg-gray-100 px-1 rounded"
                                                                     >
                                                                         {subsub.name}

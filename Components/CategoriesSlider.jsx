@@ -28,7 +28,7 @@ function buildCategoryPath(category, idMap) {
     current = current.parent ? idMap.get(current.parent) : null
   }
 
-  return `/product-category/${slugs.join('/')}`
+  return `/`
 }
 
 const CategoriesSlider = async () => {
