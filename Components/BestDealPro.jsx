@@ -1,5 +1,6 @@
 import React from 'react'
 import {getProductBySlug} from "@/lib/wordpress-api"
+import AddToCartButton from './AddToCartButton'
 
 
 const BestDealPro = async () => {
@@ -37,6 +38,7 @@ const BestDealPro = async () => {
                     </div>
 
                     <div>
+                    <AddToCartButton product={bestDealPro} />
                         <button className='bg-red-700 cursor-pointer text-white py-2 px-4 rounded font-bold'>Add to Cart</button>
 
                     </div>
