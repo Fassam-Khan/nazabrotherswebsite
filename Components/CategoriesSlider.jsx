@@ -1,5 +1,5 @@
 import React from 'react'
-import { getCategories1 } from '@/lib/wordpress-api'
+import { getCategories } from '@/lib/wordpress-api'
 import Link from 'next/link'
 import Image from 'next/image'
 import {
@@ -32,7 +32,7 @@ function buildCategoryPath(category, idMap) {
 }
 
 const CategoriesSlider = async () => {
-  const categories = await getCategories1()
+  const categories = await getCategories()
   const filterCategories = categories?.filter((cat) =>
   ["Paint Brushes", "Acrylic Paints","Watercolor", "Canvas", "Office Supplies","Art Tool &amp; Wire"].includes(cat.name)
 );  

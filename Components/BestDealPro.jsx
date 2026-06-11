@@ -1,12 +1,12 @@
 import React from 'react'
-import {getProductByBestDeal} from "@/lib/wordpress-api"
+import {getProductBySlug} from "@/lib/wordpress-api"
 
 
 const BestDealPro = async () => {
 
-    const bestDealPro = await getProductByBestDeal()
+    const bestDealPro = await getProductBySlug("daler-rowney-simply-mini-wooden-table-easel-12inches")
 
-    console.log(bestDealPro);
+
   return (
     <div className='mt-10'>
          {/* Heading  */}
@@ -18,12 +18,12 @@ const BestDealPro = async () => {
 
             {/* product card  */}
 
-            <div className='mt-8 border flex flex-wrap p-4 gap-4'>
+            <div className='mt-8 border border-black flex flex-wrap p-4 items-center gap-4'>
 
                 {/* left box  */}
 
                 <div>
-                    <img src={bestDealPro.images[0].src} alt="" />
+                    <img src={bestDealPro.images[0].src || "../public/Images/not.webp"} alt="" />
                 </div>
 
                 {/* right Box  */}
@@ -33,7 +33,7 @@ const BestDealPro = async () => {
                     </div>
 
                     <div>
-                        <p className='font-bold text-2xl '>PKR {bestDealPro.prices.price}</p>
+                        <p className='font-bold text-2xl '>PKR {bestDealPro?.price}</p>
                     </div>
 
                     <div>

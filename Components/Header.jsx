@@ -5,11 +5,11 @@ import Link from 'next/link';
 import CategoriesData from "@/data/Categories"
 import { Button } from './ui/button';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/Components/ui/hover-card';
-import { getCategories1 } from '@/lib/wordpress-api';
+import { getCategories } from '@/lib/wordpress-api';
 
 const Header = async () => {
 
-    const categories = await getCategories1()
+    const categories = await getCategories()
 
     const allowedCategories = ["Art Supplies", "Office Supplies", "School Stationery", "Gifts & Souvenirs", "Deals"]
 

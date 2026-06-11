@@ -1,10 +1,10 @@
 import React from 'react'
-import { getCategories1 } from '@/lib/wordpress-api'
+import { getCategories} from '@/lib/wordpress-api'
 import Link from 'next/link'
 
 const Categories = async () => {
 
-    const categories = await getCategories1()
+    const categories = await getCategories()
 
     const filterCategories = categories?.filter((cat) =>
         ["Paint Brushes", "Acrylic Paints", "Paints &amp; Mediums", "Writing Instruments","Resin Art" ,"Office Supplies", "Art Tool &amp; Wire","Sketch Book"].includes(cat.name)
