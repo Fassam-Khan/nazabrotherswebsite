@@ -5,9 +5,10 @@ import AddToCartButton from './AddToCartButton'
 
 const BestDealPro = async () => {
 
-    const bestDealPro = await getProductBySlug("daler-rowney-simply-mini-wooden-table-easel-12inches")
+    const bestDealPro = await getProductBySlug(process.env.BEST_DEAL_SLUG || 'daler-rowney-simply-mini-wooden-table-easel-12inches')
 
-
+ // ✅ Don't crash if product not found
+ if (!bestDealPro) return null
   return (
     <div className='mt-10'>
          {/* Heading  */}
