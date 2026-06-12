@@ -3,7 +3,7 @@ import "./globals.css";
 import Maintainance from "@/Components/Maintainance";
 import Header from "@/Components/Header";
 import { CartProvider } from "./context/CartContext";
-
+import CartSidebar from "@/Components/CartSidebar";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -30,6 +30,7 @@ export default function RootLayout({ children }) {
         <Header />
         <CartProvider>
           {children}
+          <CartSidebar/>
         </CartProvider>
       </body>
     </html>

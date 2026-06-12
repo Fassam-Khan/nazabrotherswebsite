@@ -1,76 +1,75 @@
 "use client";
-import { createContext, useContext, useState, useEffect } from "react";
 
-const CartContext = createContext();
+import { createContext, useContext, useState, useCallback } from "react";
+
+const CartContext = createContext(null);
 
 export function CartProvider({ children }) {
-  const [cart, setCart] = useState([]);
+  const [items, setItems] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
-  // Load cart from localStorage on mount
-  useEffect(() => {
-    const stored = localStorage.getItem("cart");
-    if (stored) setCart(JSON.parse(stored));
-  }, []);
+  const openCart = useCallback(() => setIsOpen(true), []);
+  const closeCart = useCallback(() => setIsOpen(false), []);
+  const toggleCart = useCallback(() => setIsOpen((prev) => !prev), []);
 
-  // Save cart to localStorage on change
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
-
-  // Add to cart
-  const addToCart = (product, quantity = 1) => {
-    setCart((prev) => {
+  const addToCart = useCallback((product) => {
+    setItems((prev) => {
       const existing = prev.find((item) => item.id === product.id);
-
       if (existing) {
-        // Increase quantity if already in cart
         return prev.map((item) =>
           item.id === product.id
-            ? { ...item, quantity: item.quantity + quantity }
+            ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       }
-
-      // Add new item
-      return [...prev, { ...product, quantity }];
+      return [...prev, { ...product, quantity: 1 }];
     });
-  };
+    setIsOpen(true); // open sidebar on add
+  }, []);
 
-  // Remove from cart
-  const removeFromCart = (productId) => {
-    setCart((prev) => prev.filter((item) => item.id !== productId));
-  };
+  const removeFromCart = useCallback((id) => {
+    setItems((prev) => prev.filter((item) => item.id !== id));
+  }, []);
 
-  // Update quantity
-  const updateQuantity = (productId, quantity) => {
-    if (quantity <= 0) return removeFromCart(productId);
-    setCart((prev) =>
-      prev.map((item) =>
-        item.id === productId ? { ...item, quantity } : item
-      )
+  const updateQuantity = useCallback((id, quantity) => {
+    if (quantity < 1) return;
+    setItems((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, quantity } : item))
     );
-  };
+  }, []);
 
-  // Clear cart
-  const clearCart = () => setCart([]);
+  const clearCart = useCallback(() => setItems([]), []);
 
-  // Cart totals
-  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-  const cartTotal = cart.reduce(
-    (sum, item) => sum + parseFloat(item.price) * item.quantity,
+  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
+  const cartCount = totalItems; // alias for backwards compatibility
+
+  const subtotal = items.reduce(
+    (sum, item) => sum + item.price * item.quantity,
     0
   );
+  const cartTotal = subtotal; // alias for backwards compatibility
 
   return (
     <CartContext.Provider
       value={{
-        cart,
+        items,
+        cart: items,            // ← add this line
+
+        cartItems: items,       // alias
+        
+        isOpen,
+        openCart,
+        closeCart,
+        toggleCart,
         addToCart,
         removeFromCart,
+        removeItem: removeFromCart, // alias
         updateQuantity,
         clearCart,
-        cartCount,
-        cartTotal,
+        totalItems,
+        cartCount,              // alias
+        subtotal,
+        cartTotal,              // alias
       }}
     >
       {children}
@@ -78,4 +77,8 @@ export function CartProvider({ children }) {
   );
 }
 
-export const useCart = () => useContext(CartContext);
+export function useCart() {
+  const ctx = useContext(CartContext);
+  if (!ctx) throw new Error("useCart must be used inside <CartProvider>");
+  return ctx;
+}

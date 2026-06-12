@@ -6,6 +6,7 @@ import CategoriesData from "@/data/Categories"
 import { Button } from './ui/button';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/Components/ui/hover-card';
 import { getCategories } from '@/lib/wordpress-api';
+import CartIcon from './CartIcon';
 
 const Header = async () => {
 
@@ -77,6 +78,7 @@ const Header = async () => {
                                 <Star className='cursor-pointer' />
                                 <span className='absolute font-bold h-4 w-4 p-2 bg-[var(--primary-color)] top-[-6px] right-[-8px] rounded-full flex items-center justify-center text-sm text-white'>0</span>
                             </div>
+
                             <div className="cart relative cursor-pointer" title="Cart">
                                 <ShoppingBag />
                                 <span className='absolute font-bold h-4 w-4 p-2 bg-[var(--primary-color)] top-[-6px] right-[-8px] rounded-full flex items-center justify-center text-sm text-white'>0</span>

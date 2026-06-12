@@ -1,48 +1,38 @@
 "use client";
+
 import { useState } from "react";
+import { ShoppingCart, Check } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { useCart } from "@/app/context/CartContext";
 
-export default function AddToCartButton({ product }) {
-  const { addToCart, cart } = useCart();
-  const [quantity, setQuantity] = useState(1);
+export default function AddToCartButton({ product, className, variant = "default", size = "default" }) {
+  const { addToCart } = useCart();
   const [added, setAdded] = useState(false);
 
-  const isInCart = cart.some((item) => item.id === product.id);
-
   const handleAddToCart = () => {
-    addToCart(product, quantity);
+    addToCart(product);
     setAdded(true);
-    setTimeout(() => setAdded(false), 2000); // reset after 2s
+    setTimeout(() => setAdded(false), 2000);
   };
 
   return (
-    <div className="flex items-center gap-3">
-      {/* Quantity Selector */}
-      <div className="flex items-center border rounded">
-        <button
-          onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-          className="px-3 py-1 text-lg"
-        >
-          −
-        </button>
-        <span className="px-4">{quantity}</span>
-        <button
-          onClick={() => setQuantity((q) => q + 1)}
-          className="px-3 py-1 text-lg"
-        >
-          +
-        </button>
-      </div>
-
-      {/* Add to Cart Button */}
-      <button
-        onClick={handleAddToCart}
-        className={`px-6 py-2 rounded text-white transition ${
-          added ? "bg-green-500" : "bg-blue-600 hover:bg-blue-700"
-        }`}
-      >
-        {added ? "✓ Added!" : isInCart ? "Add More" : "Add to Cart"}
-      </button>
-    </div>
+    <Button
+      onClick={handleAddToCart}
+      variant={variant}
+      size={size}
+      className={`transition-all ${className}`}
+    >
+      {added ? (
+        <>
+          <Check className="h-4 w-4 mr-2" />
+          Added!
+        </>
+      ) : (
+        <>
+          <ShoppingCart className="h-4 w-4 mr-2" />
+          Add to Cart
+        </>
+      )}
+    </Button>
   );
 }
