@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ShoppingCart, Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/Components/ui/button";
 import { useCart } from "@/app/context/CartContext";
 
 export default function AddToCartButton({ product, className, variant = "default", size = "default" }) {
