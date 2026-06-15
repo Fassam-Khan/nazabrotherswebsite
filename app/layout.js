@@ -4,6 +4,7 @@ import Maintainance from "@/Components/Maintainance";
 import Header from "@/Components/Header";
 import { CartProvider } from "./context/CartContext";
 import CartSidebar from "@/Components/CartSidebar";
+import { AuthProvider } from "./context/AuthContext";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -27,12 +28,14 @@ export default function RootLayout({ children }) {
 
 
       >
+        <AuthProvider>
        
         <CartProvider>
         <Header />
           {children}
           <CartSidebar/>
         </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );

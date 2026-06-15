@@ -10,6 +10,9 @@ export function CartProvider({ children }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
 
+  const [coupon, setCoupon] = useState(null);        // ← add this
+  const [couponError, setCouponError] = useState(null);
+
   // Load saved cart on first mount
   useEffect(() => {
     try {
@@ -69,11 +72,17 @@ export function CartProvider({ children }) {
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const cartCount = totalItems;
 
-  const subtotal = items.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
-  const cartTotal = subtotal;
+  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  let discount = 0;
+  if (coupon) {
+    discount = coupon.discount_type === "percent"
+      ? (subtotal * parseFloat(coupon.amount)) / 100
+      : parseFloat(coupon.amount) || 0;
+    discount = Math.min(discount, subtotal);
+  }
+  
+  const cartTotal = Math.max(subtotal - discount, 0);
 
   return (
     <CartContext.Provider
