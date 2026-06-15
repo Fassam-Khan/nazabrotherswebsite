@@ -36,7 +36,7 @@ export default function CartSidebar() {
     <Sheet open={isOpen} onOpenChange={(open) => !open && closeCart()}>
       <SheetContent
         side="right"
-        className="flex w-full flex-col sm:max-w-md p-0"
+        className="flex  flex-col  p-0"
       >
         {/* Header */}
         <SheetHeader className="px-6 py-4 border-b">
@@ -91,16 +91,7 @@ export default function CartSidebar() {
                   <span>Subtotal</span>
                   <span>${subtotal.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between text-muted-foreground">
-                  <span>Shipping</span>
-                  <span>
-                    {shipping === 0 ? (
-                      <span className="text-green-600 font-medium">Free</span>
-                    ) : (
-                      `$${shipping.toFixed(2)}`
-                    )}
-                  </span>
-                </div>
+               
                 {subtotal < 100 && (
                   <p className="text-xs text-muted-foreground">
                     Add{" "}

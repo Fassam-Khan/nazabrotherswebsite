@@ -6,8 +6,7 @@ import CategoriesData from "@/data/Categories"
 import { Button } from './ui/button';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/Components/ui/hover-card';
 import { getCategories } from '@/lib/wordpress-api';
-import CartIcon from './CartIcon';
-
+import CartIcon2 from './CartIcon2';
 const Header = async () => {
 
     const categories = await getCategories()
@@ -72,17 +71,22 @@ const Header = async () => {
                         </div>
 
                         {/* Icons */}
-                        <div className='flex gap-6'>
+                        <div className='flex gap-6 items-center'>
                             <div title='Sign In' className='cursor-pointer hidden md:block'><User /></div>
                             <div className="star relative cursor-pointer hidden md:block" title='My Wish List'>
                                 <Star className='cursor-pointer' />
                                 <span className='absolute font-bold h-4 w-4 p-2 bg-[var(--primary-color)] top-[-6px] right-[-8px] rounded-full flex items-center justify-center text-sm text-white'>0</span>
                             </div>
+                            <div>
+                               
+                            <CartIcon2/>
+                            
 
-                            <div className="cart relative cursor-pointer" title="Cart">
-                                <ShoppingBag />
-                                <span className='absolute font-bold h-4 w-4 p-2 bg-[var(--primary-color)] top-[-6px] right-[-8px] rounded-full flex items-center justify-center text-sm text-white'>0</span>
                             </div>
+
+                            
+                                
+                          
                         </div>
                     </div>
                 </div>

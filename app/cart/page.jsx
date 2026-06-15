@@ -1,6 +1,6 @@
 "use client";
 import { useCart } from "../context/CartContext";
-
+import Link from "next/link";
 export default function CartPage() {
   const { cart = [], removeFromCart, updateQuantity, cartTotal = 0, clearCart } = useCart();
 
@@ -62,8 +62,8 @@ export default function CartPage() {
           >
             Clear Cart
           </button>
-          <button className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-            Checkout
+          <button className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"><Link href={'/checkout'}>
+            Checkout</Link>
           </button>
         </div>
       </div>

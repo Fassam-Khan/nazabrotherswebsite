@@ -27,8 +27,9 @@ export default function RootLayout({ children }) {
 
 
       >
-        <Header />
+       
         <CartProvider>
+        <Header />
           {children}
           <CartSidebar/>
         </CartProvider>

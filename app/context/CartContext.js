@@ -1,12 +1,38 @@
 "use client";
 
-import { createContext, useContext, useState, useCallback } from "react";
+import { createContext, useContext, useState, useCallback, useEffect } from "react";
 
 const CartContext = createContext(null);
+const CART_STORAGE_KEY = "cart_items";
 
 export function CartProvider({ children }) {
   const [items, setItems] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  // Load saved cart on first mount
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(CART_STORAGE_KEY);
+      if (saved) {
+        setItems(JSON.parse(saved));
+      }
+    } catch (err) {
+      console.error("Failed to load cart from storage:", err);
+    } finally {
+      setIsHydrated(true);
+    }
+  }, []);
+
+  // Persist cart whenever it changes (skip until after hydration)
+  useEffect(() => {
+    if (!isHydrated) return;
+    try {
+      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+    } catch (err) {
+      console.error("Failed to save cart to storage:", err);
+    }
+  }, [items, isHydrated]);
 
   const openCart = useCallback(() => setIsOpen(true), []);
   const closeCart = useCallback(() => setIsOpen(false), []);
@@ -24,7 +50,7 @@ export function CartProvider({ children }) {
       }
       return [...prev, { ...product, quantity: 1 }];
     });
-    setIsOpen(true); // open sidebar on add
+    setIsOpen(true);
   }, []);
 
   const removeFromCart = useCallback((id) => {
@@ -41,35 +67,33 @@ export function CartProvider({ children }) {
   const clearCart = useCallback(() => setItems([]), []);
 
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
-  const cartCount = totalItems; // alias for backwards compatibility
+  const cartCount = totalItems;
 
   const subtotal = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
-  const cartTotal = subtotal; // alias for backwards compatibility
+  const cartTotal = subtotal;
 
   return (
     <CartContext.Provider
       value={{
         items,
-        cart: items,            // ← add this line
-
-        cartItems: items,       // alias
-        
+        cart: items,
+        cartItems: items,
         isOpen,
         openCart,
         closeCart,
         toggleCart,
         addToCart,
         removeFromCart,
-        removeItem: removeFromCart, // alias
+        removeItem: removeFromCart,
         updateQuantity,
         clearCart,
         totalItems,
-        cartCount,              // alias
+        cartCount,
         subtotal,
-        cartTotal,              // alias
+        cartTotal,
       }}
     >
       {children}
